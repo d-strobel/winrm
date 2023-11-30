@@ -6,6 +6,7 @@ import (
 )
 
 // Namespaces
+//
 //nolint:stylecheck // we keep the ALL_CAPS names
 const (
 	NS_SOAP_ENV    = "http://www.w3.org/2003/05/soap-envelope"
@@ -21,6 +22,7 @@ const (
 )
 
 // Namespace Prefixes
+//
 //nolint:stylecheck // we keep the ALL_CAPS names
 const (
 	NSP_SOAP_ENV    = "env"
@@ -36,6 +38,7 @@ const (
 )
 
 // DOM Namespaces
+//
 //nolint:stylecheck
 var (
 	DOM_NS_SOAP_ENV    = dom.Namespace{Prefix: "env", Uri: "http://www.w3.org/2003/05/soap-envelope"}
