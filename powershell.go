@@ -23,5 +23,5 @@ func Powershell(psCmd string) string {
 	psCmd = base64.StdEncoding.EncodeToString([]byte(encoded))
 
 	// Specify powershell.exe to run encoded command
-	return "powershell.exe -EncodedCommand " + psCmd
+	return "powershell.exe -NoProfile -EncodedCommand " + psCmd
 }

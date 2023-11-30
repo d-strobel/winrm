@@ -1,18 +1,19 @@
+<!-- Badges -->
+[![Build][build badge]][build page]
+[![GoReport][goreport badge]][goreport page]
+
 # WinRM for Go
+
+This is a fork of [masterzen/winrm](https://github.com/masterzen/winrm)!
 
 _Note_: if you're looking for the `winrm` command-line tool, this has been splitted from this project and is available at [winrm-cli](https://github.com/masterzen/winrm-cli)
 
 This is a Go library to execute remote commands on Windows machines through
 the use of WinRM/WinRS.
 
-_Note_: this library doesn't support domain users (it doesn't support GSSAPI nor Kerberos). It's primary target is to execute remote commands on EC2 windows machines.
-
-[![Build Status](https://travis-ci.org/masterzen/winrm.svg?branch=master)](https://travis-ci.org/masterzen/winrm)
-[![Coverage Status](https://coveralls.io/repos/masterzen/winrm/badge.png)](https://coveralls.io/r/masterzen/winrm)
-
 ## Contact
 
-- Bugs: https://github.com/masterzen/winrm/issues
+- Bugs: https://github.com/d-strobel/winrm/issues
 
 
 ## Getting Started
@@ -59,7 +60,7 @@ All __N.B__ points of "Preparing the remote Windows machine for Basic authentica
 You can build winrm from source:
 
 ```sh
-git clone https://github.com/masterzen/winrm
+git clone https://github.com/d-strobel/winrm
 cd winrm
 make
 ```
@@ -74,7 +75,7 @@ go version
 
 ## Command-line usage
 
-For command-line usage check the [winrm-cli project](https://github.com/masterzen/winrm-cli)
+For command-line usage check the [winrm-cli project](https://github.com/d-strobel/winrm-cli)
 
 ## Library Usage
 
@@ -86,7 +87,7 @@ For the fast version (this doesn't allow to send input to the command) and it's 
 package main
 
 import (
-	"github.com/masterzen/winrm"
+	"github.com/d-strobel/winrm"
 	"os"
 )
 
@@ -104,7 +105,7 @@ or
 ```go
 package main
 import (
-  "github.com/masterzen/winrm"
+  "github.com/d-strobel/winrm"
   "fmt"
   "os"
 )
@@ -129,7 +130,7 @@ By passing a TransportDecorator in the Parameters struct it is possible to use d
 ```go
 package main
 import (
-  "github.com/masterzen/winrm"
+  "github.com/d-strobel/winrm"
   "fmt"
   "os"
 )
@@ -158,7 +159,7 @@ package main
 import (
   "os"
   "fmt"
-  "github.com/masterzen/winrm"
+  "github.com/d-strobel/winrm"
 )
 
 endpoint := winrm.NewEndpoint("srv-win", 5985, false, false, nil, nil, nil, 0)
@@ -196,31 +197,31 @@ By passing a Dial in the Parameters struct it is possible to use different diale
 
 ```go
 package main
-     
+
  import (
-    "github.com/masterzen/winrm"
+    "github.com/d-strobel/winrm"
     "golang.org/x/crypto/ssh"
     "os"
  )
- 
+
  func main() {
- 
+
     sshClient, err := ssh.Dial("tcp","localhost:22", &ssh.ClientConfig{
         User:"ubuntu",
         Auth: []ssh.AuthMethod{ssh.Password("ubuntu")},
         HostKeyCallback: ssh.InsecureIgnoreHostKey(),
     })
- 
+
     endpoint := winrm.NewEndpoint("other-host", 5985, false, false, nil, nil, nil, 0)
- 
+
     params := winrm.DefaultParameters
     params.Dial = sshClient.Dial
- 
+
     client, err := winrm.NewClientWithParameters(endpoint, "test", "test", params)
     if err != nil {
         panic(err)
     }
- 
+
     ctx, cancel := context.WithCancel(context.Background())
     defer cancel()
     _, err = client.RunWithContextWithInput(ctx, "ipconfig", os.Stdout, os.Stderr, os.Stdin)
@@ -238,7 +239,7 @@ For a more complex example, it is possible to call the various functions directl
 package main
 
 import (
-  "github.com/masterzen/winrm"
+  "github.com/d-strobel/winrm"
   "fmt"
   "bytes"
   "os"
@@ -275,7 +276,7 @@ For using HTTPS authentication with x 509 cert without checking the CA
 package main
 
 import (
-    "github.com/masterzen/winrm"
+    "github.com/d-strobel/winrm"
     "log"
     "os"
 )
@@ -334,7 +335,7 @@ For some additional dependencies, Go needs [Mercurial](http://mercurial.selenic.
 and [Bazaar](http://bazaar.canonical.com/en/) to be installed.
 Winrm itself doesn't require these, but a dependency of a dependency does.
 
-Next, clone this repository into `$GOPATH/src/github.com/masterzen/winrm` and
+Next, clone this repository into `$GOPATH/src/github.com/d-strobel/winrm` and
 then just type `make`.
 
 You can run tests by typing `make test`.
@@ -344,3 +345,10 @@ format the code according to Go standards.
 
 When new dependencies are added to winrm you can use `make updatedeps` to
 get the latest and subsequently use `make` to compile.
+
+<!-- Badges -->
+[goreport badge]: https://goreportcard.com/badge/github.com/d-strobel/winrm
+[goreport page]: https://goreportcard.com/report/github.com/d-strobel/winrm
+
+[build badge]: https://github.com/d-strobel/winrm/actions/workflows/build.yml/badge.svg
+[build page]: https://github.com/d-strobel/winrm/actions/workflows/build.yml
