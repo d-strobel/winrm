@@ -1,3 +1,7 @@
+<!-- Badges -->
+[![Build][build badge]][build page]
+[![GoReport][goreport badge]][goreport page]
+
 # WinRM for Go
 
 This is a fork of [masterzen/winrm](https://github.com/masterzen/winrm)!
@@ -341,3 +345,10 @@ format the code according to Go standards.
 
 When new dependencies are added to winrm you can use `make updatedeps` to
 get the latest and subsequently use `make` to compile.
+
+<!-- Badges -->
+[goreport badge]: https://goreportcard.com/badge/github.com/d-strobel/winrm
+[goreport page]: https://goreportcard.com/report/github.com/d-strobel/winrm
+
+[build badge]: https://github.com/d-strobel/winrm/actions/workflows/build.yml/badge.svg
+[build page]: https://github.com/d-strobel/winrm/actions/workflows/build.yml
